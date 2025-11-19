@@ -1,10 +1,8 @@
-import "@nomicfoundation/hardhat-toolbox";
-import dotenv from "dotenv";
-
-dotenv.config();
+require("@nomicfoundation/hardhat-toolbox");
+require("dotenv").config();
 
 /** @type import('hardhat/config').HardhatUserConfig */
-export default {
+module.exports = {
   solidity: {
     version: "0.8.24",
     settings: {
@@ -22,7 +20,7 @@ export default {
       accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
       gasPrice: "auto",
     },
-    // Monad Mainnet (update RPC when available)
+    // Monad Mainnet
     monadMainnet: {
       url: process.env.MONAD_MAINNET_RPC || "https://rpc.monad.xyz",
       chainId: 143,

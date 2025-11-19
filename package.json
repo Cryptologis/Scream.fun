@@ -23,6 +23,5 @@
   },
   "dependencies": {
     "@openzeppelin/contracts": "^5.4.0"
-  },
-  "type": "module"
+  }
 }

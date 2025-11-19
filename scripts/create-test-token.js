@@ -1,8 +1,6 @@
-import { ethers } from "hardhat";
-import dotenv from "dotenv";
-import fs from "fs";
-
-dotenv.config();
+const { ethers } = require("hardhat");
+require("dotenv").config();
+const fs = require("fs");
 
 async function main() {
   console.log("🎨 Creating test meme token on Scream.fun...\n");

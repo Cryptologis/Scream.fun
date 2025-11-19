@@ -45,7 +45,7 @@ export default function Home() {
         });
       }
 
-      setTokens(tokenList.reverse()); // Show newest first
+      setTokens(tokenList.reverse());
     } catch (error) {
       console.error("Error loading tokens:", error);
     } finally {
@@ -63,7 +63,7 @@ export default function Home() {
       <div className="text-center py-12">
         <h1 className="text-6xl font-black text-white mb-4">
           Welcome to{" "}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">
             SCREAM.FUN
           </span>
         </h1>
@@ -71,15 +71,15 @@ export default function Home() {
           The fairest meme coin launchpad on Monad. No rugs. No BS. Just vibes.
         </p>
         <div className="flex gap-6 justify-center text-center">
-          <div className="bg-gray-800 px-6 py-4 rounded-lg">
-            <p className="text-3xl font-bold text-purple-400">0.4%</p>
+          <div className="bg-slate-800 px-6 py-4 rounded-lg border border-blue-700">
+            <p className="text-3xl font-bold text-cyan-400">0.4%</p>
             <p className="text-sm text-gray-400">Trading Fee</p>
           </div>
-          <div className="bg-gray-800 px-6 py-4 rounded-lg">
+          <div className="bg-slate-800 px-6 py-4 rounded-lg border border-blue-700">
             <p className="text-3xl font-bold text-red-400">2%</p>
             <p className="text-sm text-gray-400">Rage Tax</p>
           </div>
-          <div className="bg-gray-800 px-6 py-4 rounded-lg">
+          <div className="bg-slate-800 px-6 py-4 rounded-lg border border-blue-700">
             <p className="text-3xl font-bold text-green-400">85 ETH</p>
             <p className="text-sm text-gray-400">DEX Migration</p>
           </div>
@@ -96,7 +96,7 @@ export default function Home() {
         <div className="max-w-4xl mx-auto">
           <button
             onClick={() => setSelectedToken(null)}
-            className="mb-4 text-purple-400 hover:text-purple-300"
+            className="mb-4 text-cyan-400 hover:text-cyan-300"
           >
             ← Back to all tokens
           </button>
@@ -129,7 +129,7 @@ export default function Home() {
               </p>
             </div>
           ) : tokens.length === 0 ? (
-            <div className="text-center py-12 bg-gray-800 rounded-lg">
+            <div className="text-center py-12 bg-slate-800 rounded-lg border border-blue-700">
               <p className="text-2xl mb-4">🚀</p>
               <p className="text-gray-400">Be the first to create a meme token!</p>
             </div>
@@ -139,14 +139,14 @@ export default function Home() {
                 <div
                   key={token.id}
                   onClick={() => setSelectedToken(token)}
-                  className="bg-gray-800 p-6 rounded-lg cursor-pointer hover:bg-gray-700 transition border-2 border-transparent hover:border-purple-500"
+                  className="bg-slate-800 p-6 rounded-lg cursor-pointer hover:bg-slate-700 transition border-2 border-transparent hover:border-cyan-500"
                 >
                   <h3 className="text-xl font-bold text-white mb-1">{token.name}</h3>
-                  <p className="text-purple-400 font-mono mb-2">${token.symbol}</p>
+                  <p className="text-cyan-400 font-mono mb-2">${token.symbol}</p>
                   <p className="text-xs text-gray-400">
                     Created: {new Date(token.createdAt * 1000).toLocaleDateString()}
                   </p>
-                  <button className="mt-4 w-full py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition">
+                  <button className="mt-4 w-full py-2 bg-cyan-600 text-white rounded-lg hover:bg-cyan-700 transition">
                     Trade →
                   </button>
                 </div>

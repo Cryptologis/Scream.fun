@@ -1,8 +1,6 @@
-import { ethers } from "hardhat";
-import dotenv from "dotenv";
-import fs from "fs";
-
-dotenv.config();
+const { ethers } = require("hardhat");
+require("dotenv").config();
+const fs = require("fs");
 
 async function main() {
   console.log("🚀 Deploying Scream.fun contracts to Monad...\n");
@@ -64,20 +62,13 @@ async function main() {
   console.log("\n" + "=".repeat(60));
   console.log("📝 Next Steps:");
   console.log("=".repeat(60));
-  console.log("\n1. Save these addresses to your .env file:");
-  console.log(`   RAGE_FUND_ADDRESS=${rageFundAddress}`);
-  console.log(`   UNISWAP_FACTORY_ADDRESS=${uniswapFactoryAddress}`);
-  console.log(`   SCREAM_FACTORY_ADDRESS=${screamFactoryAddress}`);
+  console.log("\n1. Save these addresses to your frontend .env.local:");
+  console.log(`   NEXT_PUBLIC_SCREAM_FACTORY=${screamFactoryAddress}`);
+  console.log(`   NEXT_PUBLIC_RAGE_FUND=${rageFundAddress}`);
+  console.log(`   NEXT_PUBLIC_UNISWAP_FACTORY=${uniswapFactoryAddress}`);
 
-  console.log("\n2. Update your frontend with these addresses");
-
-  console.log("\n3. Verify contracts on explorer (if supported):");
-  console.log(`   npx hardhat verify --network monadTestnet ${rageFundAddress} "${devWallet}"`);
-  console.log(`   npx hardhat verify --network monadTestnet ${uniswapFactoryAddress} "${devWallet}"`);
-  console.log(`   npx hardhat verify --network monadTestnet ${screamFactoryAddress} "${devWallet}" "${rageFundAddress}" "${uniswapFactoryAddress}"`);
-
-  console.log("\n4. Test creating a token:");
-  console.log(`   npx hardhat run scripts/create-test-token.js --network monadTestnet`);
+  console.log("\n2. Test creating a token:");
+  console.log(`   npm run create-token:testnet`);
 
   console.log("\n" + "=".repeat(60) + "\n");
 
