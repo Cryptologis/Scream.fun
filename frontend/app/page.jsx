@@ -4,10 +4,11 @@ import { useState, useEffect } from "react";
 import { ethers } from "ethers";
 import CreateTokenForm from "@/components/CreateTokenForm";
 import TokenCard from "@/components/TokenCard";
-import { CONTRACT_ADDRESSES, SCREAM_FACTORY_ABI } from "@/lib/contracts";
+import { CONTRACT_ADDRESSES, SCREAM_FACTORY_ABI, BONDING_CURVE_ABI } from "@/lib/contracts";
 
 export default function Home() {
   const [tokens, setTokens] = useState([]);
+  const [enrichedTokens, setEnrichedTokens] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedToken, setSelectedToken] = useState(null);
 
@@ -34,6 +35,13 @@ export default function Home() {
 
       for (let i = 0; i < totalTokens; i++) {
         const info = await factory.getTokenInfo(i);
+        
+        // Get bonding curve stats
+        const curve = new ethers.Contract(info.bondingCurve, BONDING_CURVE_ABI, provider);
+        const marketCap = await curve.getMarketCap();
+        const totalVolume = await curve.totalVolume();
+        const migrated = await curve.migrated();
+
         tokenList.push({
           id: i,
           token: info.token,
@@ -41,11 +49,16 @@ export default function Home() {
           creator: info.creator,
           name: info.name,
           symbol: info.symbol,
+          imageUrl: info.imageUrl,
           createdAt: Number(info.createdAt),
+          marketCap: ethers.formatEther(marketCap),
+          totalVolume: ethers.formatEther(totalVolume),
+          migrated: migrated,
         });
       }
 
-      setTokens(tokenList.reverse());
+      setTokens(tokenList);
+      setEnrichedTokens(tokenList);
     } catch (error) {
       console.error("Error loading tokens:", error);
     } finally {
@@ -57,8 +70,104 @@ export default function Home() {
     loadTokens();
   }
 
+  // Filter functions
+  const recentlyCreated = enrichedTokens
+    .filter(t => !t.migrated)
+    .sort((a, b) => b.createdAt - a.createdAt)
+    .slice(0, 6);
+
+  const aboutToMigrate = enrichedTokens
+    .filter(t => !t.migrated && parseFloat(t.marketCap) >= 70) // 70+ ETH (close to 85)
+    .sort((a, b) => parseFloat(b.marketCap) - parseFloat(a.marketCap))
+    .slice(0, 6);
+
+  const migrated = enrichedTokens
+    .filter(t => t.migrated)
+    .sort((a, b) => b.createdAt - a.createdAt)
+    .slice(0, 6);
+
+  // King of Scream - highest score (volume * marketCap)
+  const kingOfScream = enrichedTokens
+    .map(t => ({
+      ...t,
+      score: parseFloat(t.totalVolume) * parseFloat(t.marketCap)
+    }))
+    .sort((a, b) => b.score - a.score)[0];
+
+  function TokenGrid({ tokens, emptyMessage }) {
+    if (tokens.length === 0) {
+      return (
+        <div className="text-center py-8 bg-slate-800 rounded-lg border border-blue-700">
+          <p className="text-gray-400">{emptyMessage}</p>
+        </div>
+      );
+    }
+
+    return (
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {tokens.map((token) => (
+          <div
+            key={token.id}
+            onClick={() => setSelectedToken(token)}
+            className="bg-slate-800 p-4 rounded-lg cursor-pointer hover:bg-slate-700 transition border-2 border-transparent hover:border-cyan-500"
+          >
+            <div className="flex items-start gap-3 mb-3">
+              {token.imageUrl && (
+                <img
+                  src={token.imageUrl}
+                  alt={token.name}
+                  className="w-16 h-16 rounded-lg object-cover border border-cyan-500"
+                />
+              )}
+              <div className="flex-1 min-w-0">
+                <h3 className="text-lg font-bold text-white truncate">{token.name}</h3>
+                <p className="text-cyan-400 font-mono text-sm">${token.symbol}</p>
+              </div>
+            </div>
+            
+            <div className="space-y-2 text-sm">
+              <div className="flex justify-between">
+                <span className="text-gray-400">Market Cap:</span>
+                <span className="text-white font-bold">{parseFloat(token.marketCap).toFixed(2)} ETH</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-gray-400">Volume:</span>
+                <span className="text-white font-bold">{parseFloat(token.totalVolume).toFixed(2)} ETH</span>
+              </div>
+              {!token.migrated && (
+                <div className="mt-2">
+                  <div className="flex justify-between text-xs mb-1">
+                    <span className="text-gray-400">To DEX:</span>
+                    <span className="text-cyan-400">{parseFloat(token.marketCap).toFixed(1)} / 85 ETH</span>
+                  </div>
+                  <div className="w-full bg-slate-700 rounded-full h-1.5">
+                    <div
+                      className="bg-gradient-to-r from-cyan-500 to-blue-500 h-1.5 rounded-full"
+                      style={{ width: `${Math.min((parseFloat(token.marketCap) / 85) * 100, 100)}%` }}
+                    />
+                  </div>
+                </div>
+              )}
+              {token.migrated && (
+                <div className="mt-2">
+                  <span className="inline-block px-2 py-1 bg-green-600 text-white text-xs rounded-full">
+                    ✓ Migrated
+                  </span>
+                </div>
+              )}
+            </div>
+
+            <button className="mt-3 w-full py-2 bg-cyan-600 text-white rounded-lg hover:bg-cyan-700 transition text-sm font-bold">
+              Trade →
+            </button>
+          </div>
+        ))}
+      </div>
+    );
+  }
+
   return (
-    <div className="space-y-8">
+    <div className="space-y-12">
       {/* Hero */}
       <div className="text-center py-12">
         <h1 className="text-6xl font-black text-white mb-4">
@@ -70,7 +179,7 @@ export default function Home() {
         <p className="text-xl text-gray-300 mb-6">
           The fairest meme coin launchpad on Monad. No rugs. No BS. Just vibes.
         </p>
-        <div className="flex gap-6 justify-center text-center">
+        <div className="flex gap-6 justify-center text-center flex-wrap">
           <div className="bg-slate-800 px-6 py-4 rounded-lg border border-blue-700">
             <p className="text-3xl font-bold text-cyan-400">0.4%</p>
             <p className="text-sm text-gray-400">Trading Fee</p>
@@ -85,6 +194,52 @@ export default function Home() {
           </div>
         </div>
       </div>
+
+      {/* King of Scream */}
+      {kingOfScream && (
+        <div className="bg-gradient-to-r from-yellow-900/30 to-orange-900/30 border-2 border-yellow-500 rounded-lg p-6">
+          <div className="flex items-center gap-3 mb-4">
+            <span className="text-5xl">👑</span>
+            <div>
+              <h2 className="text-3xl font-black text-yellow-400">KING OF SCREAM</h2>
+              <p className="text-sm text-gray-300">Highest Volume × Market Cap</p>
+            </div>
+          </div>
+          
+          <div 
+            onClick={() => setSelectedToken(kingOfScream)}
+            className="bg-slate-800 p-6 rounded-lg cursor-pointer hover:bg-slate-700 transition border border-yellow-500"
+          >
+            <div className="flex items-start gap-4">
+              {kingOfScream.imageUrl && (
+                <img
+                  src={kingOfScream.imageUrl}
+                  alt={kingOfScream.name}
+                  className="w-24 h-24 rounded-lg object-cover border-2 border-yellow-500"
+                />
+              )}
+              <div className="flex-1">
+                <h3 className="text-2xl font-bold text-white mb-1">{kingOfScream.name}</h3>
+                <p className="text-yellow-400 font-mono text-lg mb-3">${kingOfScream.symbol}</p>
+                <div className="grid grid-cols-3 gap-4 text-sm">
+                  <div>
+                    <p className="text-gray-400">Market Cap</p>
+                    <p className="text-white font-bold text-lg">{parseFloat(kingOfScream.marketCap).toFixed(2)} ETH</p>
+                  </div>
+                  <div>
+                    <p className="text-gray-400">Total Volume</p>
+                    <p className="text-white font-bold text-lg">{parseFloat(kingOfScream.totalVolume).toFixed(2)} ETH</p>
+                  </div>
+                  <div>
+                    <p className="text-gray-400">Score</p>
+                    <p className="text-yellow-400 font-bold text-lg">{kingOfScream.score.toFixed(0)}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Create Token */}
       <div className="max-w-2xl mx-auto">
@@ -107,53 +262,61 @@ export default function Home() {
         </div>
       )}
 
-      {/* Token List */}
+      {/* Showcase Sections */}
       {!selectedToken && (
-        <div>
-          <h2 className="text-3xl font-bold text-white mb-6">
-            {tokens.length > 0 ? "All Tokens" : "No Tokens Yet"}
-          </h2>
+        <>
+          {/* Recently Created */}
+          <div>
+            <h2 className="text-3xl font-bold text-white mb-6 flex items-center gap-2">
+              <span>🆕</span> Recently Created
+            </h2>
+            {loading ? (
+              <div className="text-center py-12">
+                <p className="text-gray-400">Loading tokens...</p>
+              </div>
+            ) : (
+              <TokenGrid tokens={recentlyCreated} emptyMessage="No tokens created yet. Be the first!" />
+            )}
+          </div>
 
-          {loading ? (
-            <div className="text-center py-12">
-              <p className="text-gray-400">Loading tokens...</p>
-            </div>
-          ) : !CONTRACT_ADDRESSES.SCREAM_FACTORY ? (
-            <div className="text-center py-12 bg-yellow-900/20 border border-yellow-600 rounded-lg p-6">
-              <p className="text-yellow-400 font-bold mb-2">⚠️ Contracts Not Deployed</p>
-              <p className="text-gray-300">
-                Please deploy the contracts first using: <code className="bg-gray-800 px-2 py-1 rounded">npm run deploy:testnet</code>
-              </p>
-              <p className="text-sm text-gray-400 mt-2">
-                Then update the contract addresses in your .env file
-              </p>
-            </div>
-          ) : tokens.length === 0 ? (
-            <div className="text-center py-12 bg-slate-800 rounded-lg border border-blue-700">
-              <p className="text-2xl mb-4">🚀</p>
-              <p className="text-gray-400">Be the first to create a meme token!</p>
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {tokens.map((token) => (
-                <div
-                  key={token.id}
-                  onClick={() => setSelectedToken(token)}
-                  className="bg-slate-800 p-6 rounded-lg cursor-pointer hover:bg-slate-700 transition border-2 border-transparent hover:border-cyan-500"
-                >
-                  <h3 className="text-xl font-bold text-white mb-1">{token.name}</h3>
-                  <p className="text-cyan-400 font-mono mb-2">${token.symbol}</p>
-                  <p className="text-xs text-gray-400">
-                    Created: {new Date(token.createdAt * 1000).toLocaleDateString()}
-                  </p>
-                  <button className="mt-4 w-full py-2 bg-cyan-600 text-white rounded-lg hover:bg-cyan-700 transition">
-                    Trade →
-                  </button>
-                </div>
-              ))}
+          {/* About to Migrate */}
+          {aboutToMigrate.length > 0 && (
+            <div>
+              <h2 className="text-3xl font-bold text-white mb-6 flex items-center gap-2">
+                <span>🚀</span> About to Migrate
+                <span className="text-sm text-gray-400 font-normal">(70+ ETH)</span>
+              </h2>
+              <TokenGrid tokens={aboutToMigrate} emptyMessage="No tokens close to migration yet" />
             </div>
           )}
-        </div>
+
+          {/* Migrated */}
+          {migrated.length > 0 && (
+            <div>
+              <h2 className="text-3xl font-bold text-white mb-6 flex items-center gap-2">
+                <span>✅</span> Migrated to DEX
+              </h2>
+              <TokenGrid tokens={migrated} emptyMessage="No tokens have migrated yet" />
+            </div>
+          )}
+
+          {/* All Tokens */}
+          <div>
+            <h2 className="text-3xl font-bold text-white mb-6">
+              All Tokens ({enrichedTokens.length})
+            </h2>
+            {!loading && !CONTRACT_ADDRESSES.SCREAM_FACTORY ? (
+              <div className="text-center py-12 bg-yellow-900/20 border border-yellow-600 rounded-lg p-6">
+                <p className="text-yellow-400 font-bold mb-2">⚠️ Contracts Not Deployed</p>
+                <p className="text-gray-300">
+                  Please deploy the contracts first using: <code className="bg-gray-800 px-2 py-1 rounded">npm run deploy:testnet</code>
+                </p>
+              </div>
+            ) : (
+              <TokenGrid tokens={enrichedTokens} emptyMessage="No tokens yet" />
+            )}
+          </div>
+        </>
       )}
     </div>
   );
