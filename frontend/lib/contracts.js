@@ -30,12 +30,12 @@ export const MONAD_MAINNET = {
   blockExplorerUrls: ["https://monadexplorer.com"],
 };
 
-// ABIs (simplified - add full ABIs from compiled contracts)
+// ABIs
 export const SCREAM_FACTORY_ABI = [
-  "function createToken(string name, string symbol) returns (address, address)",
+  "function createToken(string name, string symbol, string imageUrl) returns (address, address)",
   "function getTotalTokens() view returns (uint256)",
-  "function getTokenInfo(uint256 index) view returns (tuple(address token, address bondingCurve, address creator, uint256 createdAt, string name, string symbol))",
-  "event TokenCreated(address indexed token, address indexed bondingCurve, address indexed creator, string name, string symbol, uint256 tokenId)",
+  "function getTokenInfo(uint256 index) view returns (tuple(address token, address bondingCurve, address creator, uint256 createdAt, string name, string symbol, string imageUrl))",
+  "event TokenCreated(address indexed token, address indexed bondingCurve, address indexed creator, string name, string symbol, string imageUrl, uint256 tokenId)",
 ];
 
 export const BONDING_CURVE_ABI = [
@@ -46,6 +46,7 @@ export const BONDING_CURVE_ABI = [
   "function wouldTriggerRageTax(address seller, uint256 tokenAmount) view returns (bool, uint256)",
   "function getCurrentPrice() view returns (uint256)",
   "function getMarketCap() view returns (uint256)",
+  "function totalVolume() view returns (uint256)",
   "function token() view returns (address)",
   "function virtualTokenReserve() view returns (uint256)",
   "function realTokensSold() view returns (uint256)",
