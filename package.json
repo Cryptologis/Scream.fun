@@ -1,0 +1,28 @@
+{
+  "name": "scream-fun",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "compile": "hardhat compile",
+    "test": "hardhat test",
+    "deploy:testnet": "hardhat run scripts/deploy.js --network monadTestnet",
+    "deploy:mainnet": "hardhat run scripts/deploy.js --network monadMainnet",
+    "create-token:testnet": "hardhat run scripts/create-test-token.js --network monadTestnet",
+    "create-token:mainnet": "hardhat run scripts/create-test-token.js --network monadMainnet",
+    "node": "hardhat node"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^6.1.0",
+    "dotenv": "^17.2.3",
+    "ethers": "^6.15.0",
+    "hardhat": "^2.27.0"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^5.4.0"
+  },
+  "type": "module"
+}
