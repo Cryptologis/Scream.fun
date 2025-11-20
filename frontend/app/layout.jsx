@@ -1,5 +1,6 @@
 import "./globals.css";
 import WalletConnect from "@/components/WalletConnect";
+import SoundToggle from "@/components/SoundToggle";
 
 export const metadata = {
   title: "Scream.fun - Fair Meme Coin Launchpad on Monad",
@@ -21,7 +22,10 @@ export default function RootLayout({ children }) {
                   Fair Launch • Zero Rugs • On Monad 🚀
                 </p>
               </div>
-              <WalletConnect />
+              <div className="flex items-center gap-3">
+                <SoundToggle />
+                <WalletConnect />
+              </div>
             </div>
           </div>
         </nav>

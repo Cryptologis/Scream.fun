@@ -75,10 +75,29 @@ export function parseEther(value) {
 // Play scream sound on buy
 export function playScream() {
   try {
+    // Check if sound is muted in localStorage
+    const isMuted = localStorage.getItem('screamMuted') === 'true';
+    if (isMuted) {
+      console.log("Sound is muted");
+      return;
+    }
+
     const audio = new Audio("/scream.mp3");
     audio.volume = 0.3;
     audio.play().catch((e) => console.log("Audio play failed:", e));
   } catch (error) {
     console.log("Could not play sound:", error);
   }
+}
+
+// Toggle mute preference
+export function toggleScreamMute() {
+  const currentMute = localStorage.getItem('screamMuted') === 'true';
+  localStorage.setItem('screamMuted', (!currentMute).toString());
+  return !currentMute;
+}
+
+// Check if sound is muted
+export function isScreamMuted() {
+  return localStorage.getItem('screamMuted') === 'true';
 }
