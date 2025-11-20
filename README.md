@@ -4,6 +4,18 @@ The fairest (and most profitable) Pump.fun-style meme coin launchpad on Monad (E
 
 **ZERO creator fees forever. Dev still eats handsomely.**
 
+⚡ **Powered by Monad** - 10,000 TPS, near-instant finality, low gas fees
+
+## 🎯 Unique Features
+
+- 🖼️ **Image Uploads** - Every token gets a visual identity
+- 👑 **King of Scream Leaderboard** - Highest Volume × Market Cap
+- 🆕 **Token Showcases** - Recently Created, About to Migrate, Migrated sections
+- 🎁 **Referral System** - Earn 0.05% commission on referred token trades
+- 🔒 **Anti-Snipe Protection** - Time-based locking with gradual unlock (5 min lock + 30 min unlock)
+- 🎨 **Creator Allocation** - Optional 0-10% allocation (50% immediate, 50% at migration)
+- 💎 **Diamond Hands Rewards** - Massive holder rewards with vesting + holding requirements
+
 ## 💰 Revenue Model
 
 ### Phase 1 - Bonding Curve (Pre-Migration)
@@ -11,16 +23,24 @@ The fairest (and most profitable) Pump.fun-style meme coin launchpad on Monad (E
   - 0.2% → dev wallet
   - 0.2% → RAGE fund
 - **2% rage tax** if someone sells at >10% loss from their average buy price
-  - 70% → RAGE fund
-  - 30% → dev wallet
+  - 90% → RAGE fund (distributed to holders!)
+  - 10% → dev wallet
 
 ### Phase 2 - After Migration to AMM
 - Liquidity migrates to custom Uniswap V2-style pair at 85 ETH market cap
 - **0.3% total trading fee forever**
   - 0.15% → dev wallet
   - 0.10% → RAGE fund (distributed to holders)
-  - 0.05% → auto-buyback & burn (optional)
-- RAGE fund auto-distributes pro-rata to all current holders monthly or on milestone
+  - 0.05% → auto-buyback & burn
+
+### 💎 Diamond Hands Reward (Post-Migration)
+At migration, **90% of accumulated RAGE fund** is distributed to all token holders!
+
+**Vesting Schedule:**
+- 25% claimable every 30 days over 90 days
+- **Holding Requirement:** Must maintain token balance to claim
+- Sell tokens = lose proportional unclaimed rewards
+- True diamond hands get maximum rewards! 💪
 
 ## 🏗️ Architecture
 
@@ -35,11 +55,16 @@ The fairest (and most profitable) Pump.fun-style meme coin launchpad on Monad (E
 ### Frontend
 - Next.js 16 + React 19
 - Ethers.js v6
-- Tailwind CSS
+- Tailwind CSS 3.4
 - Wallet connection with MetaMask
 - Real-time token stats
+- **Image upload** for token branding
 - **Rage Sell button** with warning
 - **Scream sound** on every buy 🔊
+- **Token showcases** (Recently Created, About to Migrate, Migrated)
+- **King of Scream leaderboard**
+- Monad cyan/blue gradient theme
+- Integrated Monad official logo
 
 ## 📦 Installation
 
@@ -128,9 +153,16 @@ Visit http://localhost:3000
 
 1. Connect your wallet
 2. Switch to Monad Testnet (chain ID 10143)
-3. Fill in token name and symbol
-4. Click "Create Token (FREE)"
-5. Confirm transaction
+3. Fill in token details:
+   - Token Name
+   - Token Symbol
+   - **Token Image** (upload local file)
+   - **X Profile** (optional Twitter/X handle)
+   - **Creator Allocation** (0-10%, optional)
+   - **Referral Code** (optional, earn 0.05% commission)
+4. Review tokenomics breakdown
+5. Click "Create Token (FREE)"
+6. Confirm transaction
 
 ### Buying Tokens
 
@@ -203,9 +235,20 @@ npm start
 - Explorer: `https://monadexplorer.com`
 - Currency: MON
 
-## 📊 Contract Addresses
+## 📊 Deployed Contract Addresses
 
-After deployment, your addresses will be in `deployment.json`:
+### Monad Testnet (Current Deployment)
+```
+ScreamFactory:           0x7cff4191E85d06f490289737b13A7Ab4FCa5320a
+RAGEFund:                0xd22f524661d75E7e5ed0C066352aF82D2FD0Dc5A
+CustomUniswapV2Factory:  0x57E508bBF0CB7CD6f5340cd8bD15d8cCd4fFe0e1
+Dev Wallet:              0xe891d92ed8cbb30c1df98e30e35bf3b0787b983c
+```
+
+**Testnet Explorer:**
+- [View on Monad Testnet Explorer](https://testnet.monadexplorer.com)
+
+After your deployment, addresses will also be saved in `deployment.json`:
 
 ```json
 {
@@ -269,19 +312,53 @@ uint256 public constant MIGRATION_THRESHOLD = 85 ether;
 - Check you have enough token balance
 - Verify contract hasn't migrated to AMM
 
+## 📊 Detailed Tokenomics
+
+### Supply Distribution
+- **1 Billion** total supply per token
+- **800M tokens (80%)** available on bonding curve
+- **200M tokens (20%)** auto-locked in DEX liquidity at migration
+
+### Trading Fees (0.4% total)
+- **0.2%** → Dev wallet (platform revenue)
+- **0.2%** → RAGE fund (accumulates for holder rewards)
+
+### RAGE Tax (2% on panic sells)
+Applied when selling at >10% loss from average buy price:
+- **90%** → RAGE fund (distributed to holders at migration!)
+- **10%** → Dev wallet
+
+### Creator Allocation (Optional 0-10%)
+- **50%** unlocked immediately (for marketing, liquidity, etc.)
+- **50%** vested until migration (aligned incentives)
+
+### Anti-Snipe Protection
+- **5 minutes** complete lock after launch
+- **30 minutes** gradual unlock period
+- No max buy limits (fair for all)
+
+### Referral System
+- **0.05%** commission from dev fee portion
+- Paid on all trades from referred tokens
+- Passive income for promoters
+
 ## 📱 Features
 
-- ✅ Create unlimited meme tokens (FREE)
-- ✅ Fair launch bonding curve
-- ✅ Rage tax on panic sellers
+- ✅ Create unlimited meme tokens (FREE for users)
+- ✅ Fair launch bonding curve (no presales)
+- ✅ Rage tax on panic sellers (diamond hands rewarded)
 - ✅ Auto-migration to DEX at 85 ETH
-- ✅ RAGE fund distribution to holders
-- ✅ Real-time price charts
-- ✅ Wallet integration
-- ✅ Mobile responsive
-- ✅ Scream sound effects
-- ✅ Live dev earnings dashboard
-- ✅ Progress bar to migration
+- ✅ RAGE fund distribution to holders with vesting
+- ✅ Image uploads for token branding
+- ✅ King of Scream leaderboard
+- ✅ Token showcase sections
+- ✅ Real-time stats and progress bars
+- ✅ Wallet integration (MetaMask)
+- ✅ Mobile responsive design
+- ✅ Scream sound effects 🔊
+- ✅ Referral system
+- ✅ Anti-snipe protection
+- ✅ Creator allocation options
 
 ## 💎 Why Scream.fun?
 
@@ -295,20 +372,35 @@ uint256 public constant MIGRATION_THRESHOLD = 85 ether;
 
 ## 🚀 Roadmap
 
-- [x] Core contracts
+### Completed ✅
+- [x] Core contracts (6 production-ready contracts)
 - [x] Bonding curve with rage tax
 - [x] Custom AMM with fee switches
-- [x] Frontend MVP
-- [x] Wallet integration
-- [ ] Deploy to Monad testnet
-- [ ] Test all features
-- [ ] Audit contracts
+- [x] Frontend MVP with Next.js 16
+- [x] Wallet integration (MetaMask)
+- [x] **Deploy to Monad testnet**
+- [x] **Image upload for tokens**
+- [x] **Token showcases** (Recently Created, About to Migrate, Migrated)
+- [x] **King of Scream leaderboard**
+- [x] **Referral system**
+- [x] **Anti-snipe protection**
+- [x] **Creator allocation with vesting**
+- [x] **Diamond Hands Rewards with vesting**
+- [x] **Monad branding integration**
+
+### In Progress 🚧
+- [ ] Testing all features on testnet
+- [ ] RAGE fund vesting contract implementation
+- [ ] Comprehensive documentation
+
+### Planned 📋
+- [ ] Security audit
 - [ ] Deploy to Monad mainnet
-- [ ] Add token charts
-- [ ] Add leaderboard
-- [ ] Mobile app
+- [ ] Advanced token charts
+- [ ] Mobile-optimized interface
 - [ ] Multi-token RAGE distribution
-- [ ] Governance token
+- [ ] Governance features
+- [ ] Analytics dashboard
 
 ## 📄 License
 
