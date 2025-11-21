@@ -3,8 +3,12 @@ pragma solidity ^0.8.24;
 
 import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "./ScreamToken.sol";
 import "./RAGEFund.sol";
+import "./WMON.sol";
+import "./CustomUniswapV2Factory.sol";
+import "./CustomUniswapV2Pair.sol";
 
 /**
  * @title BondingCurve
@@ -21,7 +25,8 @@ contract BondingCurve is ReentrancyGuard, Ownable {
     // Constants
     uint256 public constant TOTAL_SUPPLY = 1_000_000_000 * 10**18; // 1 billion tokens
     uint256 public constant BONDING_CURVE_SUPPLY = 800_000_000 * 10**18; // 80% for bonding curve
-    uint256 public constant MIGRATION_THRESHOLD = 85 ether; // Market cap to trigger migration
+    uint256 public constant MIGRATION_THRESHOLD = 2_760 ether; // Market cap to trigger migration ($69k at $25/MON)
+    uint256 public constant LIQUIDITY_ALLOCATION = 480 ether; // Liquidity for Uniswap ($12k at $25/MON)
     uint256 public constant VIRTUAL_ETH_RESERVE = 30 ether; // Virtual liquidity
 
     // Fee constants (in basis points, 10000 = 100%)
@@ -36,8 +41,10 @@ contract BondingCurve is ReentrancyGuard, Ownable {
     // State variables
     ScreamToken public token;
     RAGEFund public rageFund;
+    WMON public wmon;
     address public devWallet;
-    address public uniswapFactory;
+    CustomUniswapV2Factory public uniswapFactory;
+    address public uniswapPair;
 
     uint256 public virtualTokenReserve;
     uint256 public realTokensSold;
@@ -63,15 +70,18 @@ contract BondingCurve is ReentrancyGuard, Ownable {
         address _devWallet,
         address _rageFund,
         address _uniswapFactory,
+        address _wmon,
         string memory name,
         string memory symbol
     ) Ownable(msg.sender) {
         require(_devWallet != address(0), "Invalid dev wallet");
         require(_rageFund != address(0), "Invalid RAGE fund");
+        require(_wmon != address(0), "Invalid WMON");
 
         devWallet = _devWallet;
         rageFund = RAGEFund(payable(_rageFund));
-        uniswapFactory = _uniswapFactory;
+        uniswapFactory = CustomUniswapV2Factory(_uniswapFactory);
+        wmon = WMON(payable(_wmon));
 
         // Deploy token
         token = new ScreamToken(name, symbol, TOTAL_SUPPLY, address(this));
@@ -260,15 +270,58 @@ contract BondingCurve is ReentrancyGuard, Ownable {
 
     /**
      * @notice Migrate to Uniswap V2 pool (internal)
+     * @dev Allocates 480 MON (50/50 split) to Uniswap, remaining MON to dev wallet
      */
     function _migrate() internal {
         require(!migrated, "Already migrated");
+        require(address(this).balance >= LIQUIDITY_ALLOCATION, "Insufficient balance");
+
         migrated = true;
 
-        // TODO: Integration with custom Uniswap V2 factory
-        // This will create a pair with custom fee structure
+        // Calculate 50/50 split for liquidity pool
+        // Half of LIQUIDITY_ALLOCATION goes to WMON, half to tokens (by value)
+        uint256 monForLiquidity = LIQUIDITY_ALLOCATION / 2; // 240 MON
 
-        emit Migrated(address(0), ethReserve, BONDING_CURVE_SUPPLY - virtualTokenReserve);
+        // Calculate token amount needed for 50/50 value split
+        // Current price = ethReserve / virtualTokenReserve
+        // Token amount = monForLiquidity * virtualTokenReserve / ethReserve
+        uint256 tokenAmount = (monForLiquidity * virtualTokenReserve) / ethReserve;
+
+        require(tokenAmount <= virtualTokenReserve, "Insufficient token reserve");
+
+        // Update reserves
+        virtualTokenReserve -= tokenAmount;
+
+        // Create pair if it doesn't exist
+        address token0 = address(token);
+        address token1 = address(wmon);
+
+        if (uniswapFactory.getPair(token0, token1) == address(0)) {
+            uniswapPair = uniswapFactory.createPair(token0, token1);
+        } else {
+            uniswapPair = uniswapFactory.getPair(token0, token1);
+        }
+
+        // Wrap MON to WMON
+        wmon.deposit{value: monForLiquidity}();
+
+        // Transfer tokens to pair
+        require(token.transfer(uniswapPair, tokenAmount), "Token transfer failed");
+
+        // Transfer WMON to pair
+        require(wmon.transfer(uniswapPair, monForLiquidity), "WMON transfer failed");
+
+        // Mint LP tokens (sent to this contract for now - could be burned or sent to dev)
+        CustomUniswapV2Pair(uniswapPair).mint(devWallet);
+
+        // Send remaining MON to dev wallet
+        uint256 remainingMon = address(this).balance;
+        if (remainingMon > 0) {
+            (bool success, ) = devWallet.call{value: remainingMon}("");
+            require(success, "Remaining MON transfer failed");
+        }
+
+        emit Migrated(uniswapPair, monForLiquidity, tokenAmount);
     }
 
     /**

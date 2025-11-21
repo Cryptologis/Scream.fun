@@ -264,13 +264,16 @@ export default function TokenCard({ tokenAddress, bondingCurveAddress }) {
         <div className="flex justify-between mb-2">
           <span className="text-sm text-gray-400">Progress to DEX Migration</span>
           <span className="text-sm font-bold text-white">
-            {curveInfo.marketCap} / 85 MON
+            {parseFloat(curveInfo.marketCap).toFixed(2)} / 2,760 MON
           </span>
+        </div>
+        <div className="text-xs text-gray-400 mb-2">
+          Target: $69,000 market cap → $12,000 liquidity to Uniswap V2 (50/50 MON/Token split)
         </div>
         <div className="w-full bg-gray-600 rounded-full h-3">
           <div
             className="bg-gradient-to-r from-purple-600 to-pink-600 h-3 rounded-full transition-all"
-            style={{ width: `${Math.min((parseFloat(curveInfo.marketCap) / 85) * 100, 100)}%` }}
+            style={{ width: `${Math.min((parseFloat(curveInfo.marketCap) / 2760) * 100, 100)}%` }}
           />
         </div>
       </div>

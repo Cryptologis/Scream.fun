@@ -13,6 +13,7 @@ contract ScreamFactory {
     address public devWallet;
     address public rageFund;
     address public uniswapFactory;
+    address public wmon;                 // Wrapped MON for Uniswap pairs
     address public developmentFund;      // 25% of voting revenue for protocol development
     address public communityTreasury;    // 50% of voting revenue for DAO-controlled rewards
     address public owner;
@@ -76,6 +77,7 @@ contract ScreamFactory {
         address _devWallet,
         address _rageFund,
         address _uniswapFactory,
+        address _wmon,
         address _developmentFund,
         address _communityTreasury
     ) {
@@ -83,6 +85,7 @@ contract ScreamFactory {
         devWallet = _devWallet;
         rageFund = _rageFund;
         uniswapFactory = _uniswapFactory;
+        wmon = _wmon;
         developmentFund = _developmentFund;
         communityTreasury = _communityTreasury;
     }
@@ -103,6 +106,7 @@ contract ScreamFactory {
             devWallet,
             rageFund,
             uniswapFactory,
+            wmon,
             name,
             symbol
         );
@@ -169,6 +173,13 @@ contract ScreamFactory {
      */
     function setUniswapFactory(address _uniswapFactory) external onlyOwner {
         uniswapFactory = _uniswapFactory;
+    }
+
+    /**
+     * @notice Update WMON address (only owner)
+     */
+    function setWMON(address _wmon) external onlyOwner {
+        wmon = _wmon;
     }
 
     /**
