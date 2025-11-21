@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { ethers } from "ethers";
 import CreateTokenForm from "@/components/CreateTokenForm";
 import TokenCard from "@/components/TokenCard";
+import MostScreamed from "@/components/MostScreamed";
 import { CONTRACT_ADDRESSES, SCREAM_FACTORY_ABI, BONDING_CURVE_ABI } from "@/lib/contracts";
 
 export default function Home() {
@@ -205,8 +206,8 @@ export default function Home() {
               <p className="text-sm text-gray-300">Highest Volume × Market Cap</p>
             </div>
           </div>
-          
-          <div 
+
+          <div
             onClick={() => setSelectedToken(kingOfScream)}
             className="bg-slate-800 p-6 rounded-lg cursor-pointer hover:bg-slate-700 transition border border-yellow-500"
           >
@@ -240,6 +241,9 @@ export default function Home() {
           </div>
         </div>
       )}
+
+      {/* Most Screamed - Community Voting */}
+      <MostScreamed />
 
       {/* Create Token */}
       <div className="max-w-2xl mx-auto">
