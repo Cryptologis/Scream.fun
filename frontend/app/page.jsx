@@ -140,7 +140,7 @@ export default function Home() {
                 <div className="mt-2">
                   <div className="flex justify-between text-xs mb-1">
                     <span className="text-gray-400">To DEX:</span>
-                    <span className="text-cyan-400">{parseFloat(token.marketCap).toFixed(1)} / 85 MC</span>
+                    <span className="text-cyan-400">{parseFloat(token.marketCap).toFixed(1)} / 85K</span>
                   </div>
                   <div className="w-full bg-slate-700 rounded-full h-1.5">
                     <div
@@ -191,7 +191,7 @@ export default function Home() {
             <p className="text-sm text-gray-400">Rage Tax</p>
           </div>
           <div className="bg-slate-800 px-6 py-4 rounded-lg border border-blue-700">
-            <p className="text-3xl font-bold text-green-400">85 MC</p>
+            <p className="text-3xl font-bold text-green-400">85K</p>
             <p className="text-sm text-gray-400">DEX Migration</p>
           </div>
         </div>

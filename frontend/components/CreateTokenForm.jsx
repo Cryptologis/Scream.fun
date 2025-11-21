@@ -186,7 +186,7 @@ export default function CreateTokenForm({ onSuccess }) {
           <li>1B total supply (800M on bonding curve)</li>
           <li>0.4% trading fee (0.2% dev, 0.2% RAGE fund)</li>
           <li>2% rage tax on panic sells (&gt;10% loss)</li>
-          <li>Auto-migrates to DEX at 85 MC</li>
+          <li>Auto-migrates to DEX at 85K</li>
         </ul>
       </div>
 
