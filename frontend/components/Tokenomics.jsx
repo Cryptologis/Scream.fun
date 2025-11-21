@@ -58,7 +58,7 @@ export default function Tokenomics() {
             <span className="text-4xl">📈</span>
             <div>
               <h3 className="text-2xl font-black text-cyan-400">Phase 1: Bonding Curve</h3>
-              <p className="text-sm text-gray-400">Pre-Migration (0 → 85 MON)</p>
+              <p className="text-sm text-gray-400">Pre-Migration (0 → 85 MC)</p>
             </div>
           </div>
 
@@ -108,7 +108,7 @@ export default function Tokenomics() {
             <span className="text-4xl">🚀</span>
             <div>
               <h3 className="text-2xl font-black text-purple-400">Phase 2: DEX Trading</h3>
-              <p className="text-sm text-gray-400">Post-Migration (85 MON+)</p>
+              <p className="text-sm text-gray-400">Post-Migration (85 MC+)</p>
             </div>
           </div>
 
