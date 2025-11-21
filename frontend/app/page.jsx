@@ -169,9 +169,35 @@ export default function Home() {
   }
 
   return (
-    <div className="space-y-12">
+    <div className="space-y-12 relative">
+      {/* Background Logo Watermark */}
+      <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] opacity-5">
+          {/* Option 1: Image Logo (when you add your logo file) */}
+          {/* <img
+            src="/logo.png"
+            alt="Scream.fun"
+            className="w-full h-full object-contain blur-sm"
+          /> */}
+
+          {/* Option 2: Text Logo Placeholder (current) */}
+          <div className="w-full h-full flex items-center justify-center">
+            <div className="text-[280px] font-black text-cyan-400 leading-none rotate-[-15deg]">
+              😱
+            </div>
+          </div>
+        </div>
+
+        {/* Secondary floating logo */}
+        <div className="absolute bottom-20 right-10 w-[400px] h-[400px] opacity-3">
+          <div className="text-[200px] font-black text-blue-500 rotate-12">
+            😱
+          </div>
+        </div>
+      </div>
+
       {/* Hero */}
-      <div className="text-center py-12">
+      <div className="text-center py-12 relative z-10">
         <h1 className="text-6xl font-black text-white mb-4">
           Welcome to{" "}
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">
@@ -199,7 +225,7 @@ export default function Home() {
 
       {/* King of Scream */}
       {kingOfScream && (
-        <div className="bg-gradient-to-r from-yellow-900/30 to-orange-900/30 border-2 border-yellow-500 rounded-lg p-6">
+        <div className="bg-gradient-to-r from-yellow-900/30 to-orange-900/30 border-2 border-yellow-500 rounded-lg p-6 relative z-10">
           <div className="flex items-center gap-3 mb-4">
             <span className="text-5xl">👑</span>
             <div>
@@ -244,19 +270,23 @@ export default function Home() {
       )}
 
       {/* Most Screamed - Community Voting */}
-      <MostScreamed />
+      <div className="relative z-10">
+        <MostScreamed />
+      </div>
 
       {/* Tokenomics Section */}
-      <Tokenomics />
+      <div className="relative z-10">
+        <Tokenomics />
+      </div>
 
       {/* Create Token */}
-      <div className="max-w-2xl mx-auto">
+      <div className="max-w-2xl mx-auto relative z-10">
         <CreateTokenForm onSuccess={handleTokenCreated} />
       </div>
 
       {/* Selected Token Detail */}
       {selectedToken && (
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-4xl mx-auto relative z-10">
           <button
             onClick={() => setSelectedToken(null)}
             className="mb-4 text-cyan-400 hover:text-cyan-300"
@@ -274,7 +304,7 @@ export default function Home() {
       {!selectedToken && (
         <>
           {/* Recently Created */}
-          <div>
+          <div className="relative z-10">
             <h2 className="text-3xl font-bold text-white mb-6 flex items-center gap-2">
               <span>🆕</span> Recently Created
             </h2>
@@ -289,7 +319,7 @@ export default function Home() {
 
           {/* About to Migrate */}
           {aboutToMigrate.length > 0 && (
-            <div>
+            <div className="relative z-10">
               <h2 className="text-3xl font-bold text-white mb-6 flex items-center gap-2">
                 <span>🚀</span> About to Migrate
                 <span className="text-sm text-gray-400 font-normal">(70+ MON)</span>
@@ -300,7 +330,7 @@ export default function Home() {
 
           {/* Migrated */}
           {migrated.length > 0 && (
-            <div>
+            <div className="relative z-10">
               <h2 className="text-3xl font-bold text-white mb-6 flex items-center gap-2">
                 <span>✅</span> Migrated to DEX
               </h2>
@@ -309,7 +339,7 @@ export default function Home() {
           )}
 
           {/* All Tokens */}
-          <div>
+          <div className="relative z-10">
             <h2 className="text-3xl font-bold text-white mb-6">
               All Tokens ({enrichedTokens.length})
             </h2>
