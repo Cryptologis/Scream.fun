@@ -11,9 +11,14 @@ async function main() {
   const balance = await ethers.provider.getBalance(deployer.address);
   console.log("Account balance:", ethers.formatEther(balance), "ETH\n");
 
-  // Get dev wallet from env or use deployer
+  // Get wallets from env or use deployer
   const devWallet = process.env.DEV_WALLET || deployer.address;
+  const developmentFund = process.env.DEVELOPMENT_FUND || deployer.address;
+  const communityTreasury = process.env.COMMUNITY_TREASURY || deployer.address;
+
   console.log("Dev wallet set to:", devWallet);
+  console.log("Development fund set to:", developmentFund);
+  console.log("Community treasury set to:", communityTreasury);
 
   // 1. Deploy RAGEFund
   console.log("\n📦 Deploying RAGEFund...");
@@ -43,7 +48,9 @@ async function main() {
   const screamFactory = await ScreamFactory.deploy(
     devWallet,
     rageFundAddress,
-    uniswapFactoryAddress
+    uniswapFactoryAddress,
+    developmentFund,
+    communityTreasury
   );
   await screamFactory.waitForDeployment();
   const screamFactoryAddress = await screamFactory.getAddress();
@@ -57,7 +64,10 @@ async function main() {
   console.log(`RAGEFund:                ${rageFundAddress}`);
   console.log(`CustomUniswapV2Factory:  ${uniswapFactoryAddress}`);
   console.log(`ScreamFactory:           ${screamFactoryAddress}`);
-  console.log(`\nDev Wallet:              ${devWallet}`);
+  console.log(`\n💰 Wallet Addresses:\n`);
+  console.log(`Dev Wallet (25%):        ${devWallet}`);
+  console.log(`Development Fund (25%):  ${developmentFund}`);
+  console.log(`Community Treasury (50%): ${communityTreasury}`);
 
   console.log("\n" + "=".repeat(60));
   console.log("📝 Next Steps:");
@@ -77,7 +87,11 @@ async function main() {
     network: (await ethers.provider.getNetwork()).chainId.toString(),
     timestamp: new Date().toISOString(),
     deployer: deployer.address,
-    devWallet: devWallet,
+    wallets: {
+      devWallet: devWallet,
+      developmentFund: developmentFund,
+      communityTreasury: communityTreasury,
+    },
     contracts: {
       rageFund: rageFundAddress,
       uniswapFactory: uniswapFactoryAddress,

@@ -155,6 +155,9 @@ export default function MostScreamed() {
         <p className="text-xs text-purple-400 text-center mt-1">
           Daily contest resets every 24h • Build streaks for bonus multipliers
         </p>
+        <p className="text-xs text-green-400 text-center mt-2 font-bold">
+          💚 50% of voting revenue goes to community treasury (future DAO)
+        </p>
       </div>
     </div>
   );

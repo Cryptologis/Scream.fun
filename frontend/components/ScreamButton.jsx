@@ -152,6 +152,9 @@ export default function ScreamButton({ tokenAddress }) {
         <p className="text-xs text-gray-400 text-center">
           Cost: 0.0005 ETH • Vote once per 24h
         </p>
+        <p className="text-xs text-purple-300 text-center">
+          Revenue: 50% Community • 25% Development • 25% Protocol
+        </p>
         {canVote && (
           <div className="text-xs text-center space-y-1">
             <p className="text-purple-400">

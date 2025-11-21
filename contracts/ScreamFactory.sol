@@ -13,6 +13,8 @@ contract ScreamFactory {
     address public devWallet;
     address public rageFund;
     address public uniswapFactory;
+    address public developmentFund;      // 25% of voting revenue for protocol development
+    address public communityTreasury;    // 50% of voting revenue for DAO-controlled rewards
     address public owner;
 
     struct TokenInfo {
@@ -70,11 +72,19 @@ contract ScreamFactory {
         _;
     }
 
-    constructor(address _devWallet, address _rageFund, address _uniswapFactory) {
+    constructor(
+        address _devWallet,
+        address _rageFund,
+        address _uniswapFactory,
+        address _developmentFund,
+        address _communityTreasury
+    ) {
         owner = msg.sender;
         devWallet = _devWallet;
         rageFund = _rageFund;
         uniswapFactory = _uniswapFactory;
+        developmentFund = _developmentFund;
+        communityTreasury = _communityTreasury;
     }
 
     /**
@@ -162,6 +172,20 @@ contract ScreamFactory {
     }
 
     /**
+     * @notice Update development fund (only owner)
+     */
+    function setDevelopmentFund(address _developmentFund) external onlyOwner {
+        developmentFund = _developmentFund;
+    }
+
+    /**
+     * @notice Update community treasury (only owner)
+     */
+    function setCommunityTreasury(address _communityTreasury) external onlyOwner {
+        communityTreasury = _communityTreasury;
+    }
+
+    /**
      * @notice Transfer ownership
      */
     function transferOwnership(address newOwner) external onlyOwner {
@@ -230,11 +254,12 @@ contract ScreamFactory {
         userVote.lastVoteTime = block.timestamp;
         userVote.lastVoteDay = currentDay;
 
-        // Distribute vote fees: 50% RAGE fund, 50% dev wallet
-        uint256 halfFee = msg.value / 2;
-        (bool successRage, ) = rageFund.call{value: halfFee}("");
-        (bool successDev, ) = devWallet.call{value: msg.value - halfFee}("");
-        require(successRage && successDev, "Fee transfer failed");
+        // Distribute vote fees: 25% dev, 25% development fund, 50% community treasury
+        uint256 quarterFee = msg.value / 4;
+        (bool s1, ) = devWallet.call{value: quarterFee}("");
+        (bool s2, ) = developmentFund.call{value: quarterFee}("");
+        (bool s3, ) = communityTreasury.call{value: msg.value / 2}("");
+        require(s1 && s2 && s3, "Fee transfer failed");
 
         emit TokenScreamed(
             tokenAddress,

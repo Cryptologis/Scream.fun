@@ -17,6 +17,28 @@ The fairest (and most profitable) Pump.fun-style meme coin launchpad on Monad (E
 - 🎨 **Creator Allocation** - Optional 0-10% allocation (50% immediate, 50% at migration)
 - 💎 **Diamond Hands Rewards** - Massive holder rewards with vesting + holding requirements
 
+## 💚 Community-First Philosophy
+
+**Unlike other platforms that keep everything, Scream.fun gives MORE to the community than to the protocol owner.**
+
+From voting revenue:
+- **50% goes directly to community treasury** (controlled by future DAO)
+- 25% funds protocol development (audits, features, team)
+- 25% to protocol owner (maintenance & operations)
+
+**What this means:**
+- The community literally owns MORE of the platform than the creator
+- Voting revenue creates a war chest for holder rewards
+- Progressive decentralization from day one
+- Aligned incentives: platform success = community wealth
+
+**DAO Governance Roadmap:**
+1. **Phase 1 (Launch):** Treasury accumulates, community builds trust
+2. **Phase 2 (6 months):** Launch governance token, delegate control gradually
+3. **Phase 3 (12 months):** Full DAO control of treasury decisions
+
+This isn't just another cash grab - we're building a platform the community actually OWNS.
+
 ## 💰 Revenue Model
 
 ### Phase 1 - Bonding Curve (Pre-Migration)
@@ -52,7 +74,10 @@ A gamified voting system that lets the community decide which tokens deserve the
 **Voting Mechanics:**
 - **Cost:** 0.0005 ETH per scream (low barrier to entry)
 - **Cooldown:** Vote once per 24 hours per token
-- **Revenue Split:** 50% to RAGE fund, 50% to dev wallet
+- **Revenue Split (Community-First!):**
+  - **50% → Community Treasury** (DAO-controlled rewards for holders)
+  - **25% → Development Fund** (audits, features, team expansion)
+  - **25% → Protocol Owner** (maintenance & operations)
 
 **Vote Power Multipliers:**
 - **Base Vote:** 1x scream power
@@ -88,9 +113,18 @@ A gamified voting system that lets the community decide which tokens deserve the
 
 ### Revenue Potential
 
-At 1,000 daily screams:
-- Revenue: 0.5 ETH/day = 182.5 ETH/year (~$273k @ $1.5k ETH)
-- Split: 91.25 ETH to dev, 91.25 ETH to RAGE fund
+At 1,000 daily screams (0.5 ETH/day = 182.5 ETH/year):
+
+**Annual Distribution @ $1.5k ETH:**
+- **Community Treasury (50%):** 91.25 ETH (~$137k) - DAO-controlled
+- **Development Fund (25%):** 45.6 ETH (~$68k) - Audits, features, team
+- **Protocol Owner (25%):** 45.6 ETH (~$68k) - Operations
+
+**Why This Matters:**
+- **Community gets MORE than the protocol owner** - builds massive trust
+- Development fund ensures long-term sustainability
+- Creates alignment between platform success and community wealth
+- Future DAO can decide on airdrops, staking rewards, buybacks, etc.
 
 This is **in addition** to trading fees!
 
@@ -415,13 +449,15 @@ Applied when selling at >10% loss from average buy price:
 
 ## 💎 Why Scream.fun?
 
-1. **Zero Creator Fees** - No rug pulls, no honeypots
-2. **Fair Launch** - Everyone buys from bonding curve
-3. **Rage Tax** - Punishes panic sellers, rewards diamond hands
-4. **Auto Migration** - Becomes a real DEX pair at threshold
-5. **Profit Sharing** - Dev fees + RAGE distributions
-6. **Monad Speed** - 10k TPS, near-instant finality
-7. **Low Fees** - Cheap gas on Monad
+1. **Community-First** - 50% of voting revenue to community treasury (MORE than protocol owner!)
+2. **Zero Creator Fees** - No rug pulls, no honeypots
+3. **Fair Launch** - Everyone buys from bonding curve
+4. **Rage Tax** - Punishes panic sellers, rewards diamond hands
+5. **Auto Migration** - Becomes a real DEX pair at threshold
+6. **Profit Sharing** - Dev fees + RAGE distributions
+7. **Future DAO** - Progressive decentralization roadmap
+8. **Monad Speed** - 10k TPS, near-instant finality
+9. **Low Fees** - Cheap gas on Monad
 
 ## 🚀 Roadmap
 
