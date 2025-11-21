@@ -48,7 +48,7 @@ contract BondingCurve is ReentrancyGuard, Ownable {
     struct UserPosition {
         uint256 totalTokensBought;
         uint256 totalEthSpent;
-        uint256 averageBuyPrice; // ETH per token * 1e18
+        uint256 averageBuyPrice; // MON per token * 1e18 (native token)
     }
 
     mapping(address => UserPosition) public userPositions;
@@ -82,7 +82,7 @@ contract BondingCurve is ReentrancyGuard, Ownable {
     }
 
     /**
-     * @notice Calculate tokens received for ETH (before fees)
+     * @notice Calculate tokens received for native token (before fees)
      * @dev Uses linear bonding curve: price = k * supply
      */
     function calculatePurchaseReturn(uint256 ethAmount) public view returns (uint256) {
@@ -106,7 +106,7 @@ contract BondingCurve is ReentrancyGuard, Ownable {
     }
 
     /**
-     * @notice Calculate ETH received for tokens (before fees)
+     * @notice Calculate native token received for tokens (before fees)
      */
     function calculateSaleReturn(uint256 tokenAmount) public view returns (uint256) {
         if (tokenAmount == 0) return 0;
@@ -149,7 +149,7 @@ contract BondingCurve is ReentrancyGuard, Ownable {
     }
 
     /**
-     * @notice Buy tokens with ETH
+     * @notice Buy tokens with native token (MON on Monad)
      */
     function buy(uint256 minTokensOut) external payable nonReentrant {
         require(!migrated, "Already migrated");
@@ -198,7 +198,7 @@ contract BondingCurve is ReentrancyGuard, Ownable {
     }
 
     /**
-     * @notice Sell tokens for ETH
+     * @notice Sell tokens for native token (MON on Monad)
      */
     function sell(uint256 tokenAmount, uint256 minEthOut, bool acceptRageTax) external nonReentrant {
         require(!migrated, "Already migrated");
@@ -272,7 +272,7 @@ contract BondingCurve is ReentrancyGuard, Ownable {
     }
 
     /**
-     * @notice Get current token price in ETH
+     * @notice Get current token price in native token
      */
     function getCurrentPrice() external view returns (uint256) {
         if (virtualTokenReserve == 0) return 0;
@@ -280,7 +280,7 @@ contract BondingCurve is ReentrancyGuard, Ownable {
     }
 
     /**
-     * @notice Get market cap in ETH
+     * @notice Get market cap in native token
      */
     function getMarketCap() external view returns (uint256) {
         return ethReserve;

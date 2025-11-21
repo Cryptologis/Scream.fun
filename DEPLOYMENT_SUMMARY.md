@@ -35,7 +35,7 @@ scream-fun/
 - ✅ **BondingCurve.sol** - Linear bonding curve with:
   - 0.4% trading fee (0.2% dev + 0.2% RAGE)
   - 2% rage tax on panic sells (>10% loss)
-  - Auto-migration at 85 ETH market cap
+  - Auto-migration at 85 MON market cap
   - Slippage protection
   - ReentrancyGuard security
 
@@ -94,13 +94,13 @@ Trading Fees: 0.3%
 
 ### 📊 Revenue Calculations
 
-At **100 ETH daily volume**:
-- **Phase 1**: ~0.26 ETH/day = 94.9 ETH/year (~$142k @ $1.5k ETH)
-- **Phase 2**: ~0.15 ETH/day = 54.75 ETH/year (~$82k @ $1.5k ETH)
+At **100 MON daily volume**:
+- **Phase 1**: ~0.26 MON/day = 94.9 MON/year (~$142k @ $1.5k MON)
+- **Phase 2**: ~0.15 MON/day = 54.75 MON/year (~$82k @ $1.5k MON)
 
-At **1,000 ETH daily volume**:
-- **Phase 1**: ~2.6 ETH/day = 949 ETH/year (~$1.42M @ $1.5k ETH)
-- **Phase 2**: ~1.5 ETH/day = 547.5 ETH/year (~$821k @ $1.5k ETH)
+At **1,000 MON daily volume**:
+- **Phase 1**: ~2.6 MON/day = 949 MON/year (~$1.42M @ $1.5k MON)
+- **Phase 2**: ~1.5 MON/day = 547.5 MON/year (~$821k @ $1.5k MON)
 
 *These are dev wallet earnings only. RAGE fund is separate for holder distributions.*
 
@@ -309,7 +309,7 @@ Your launchpad generates passive income forever:
 - No maintenance required
 - Can sell project later for 10-50x annual revenue
 
-**With 1000 ETH daily volume = ~$1M/year passive income**
+**With 1000 MON daily volume = ~$1M/year passive income**
 
 ## 📞 Support
 

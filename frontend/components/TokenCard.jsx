@@ -140,7 +140,7 @@ export default function TokenCard({ tokenAddress, bondingCurveAddress }) {
       const tx = await curve.sell(tokenAmount, minEth, isRageSell);
       await tx.wait();
 
-      alert(`Success! Sold for ${formatEther(ethOut, 4)} ETH`);
+      alert(`Success! Sold for ${formatEther(ethOut, 4)} MON`);
       setSellAmount("");
       loadTokenInfo();
     } catch (error) {
@@ -176,15 +176,15 @@ export default function TokenCard({ tokenAddress, bondingCurveAddress }) {
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         <div className="bg-gray-700 p-4 rounded-lg">
           <p className="text-sm text-gray-400">Price</p>
-          <p className="text-lg font-bold text-white">{parseFloat(curveInfo.price).toFixed(8)} ETH</p>
+          <p className="text-lg font-bold text-white">{parseFloat(curveInfo.price).toFixed(8)} MON</p>
         </div>
         <div className="bg-gray-700 p-4 rounded-lg">
           <p className="text-sm text-gray-400">Market Cap</p>
-          <p className="text-lg font-bold text-white">{parseFloat(curveInfo.marketCap).toFixed(2)} ETH</p>
+          <p className="text-lg font-bold text-white">{parseFloat(curveInfo.marketCap).toFixed(2)} MON</p>
         </div>
         <div className="bg-gray-700 p-4 rounded-lg">
           <p className="text-sm text-gray-400">RAGE Fund</p>
-          <p className="text-lg font-bold text-purple-400">{parseFloat(rageFundBalance).toFixed(4)} ETH</p>
+          <p className="text-lg font-bold text-purple-400">{parseFloat(rageFundBalance).toFixed(4)} MON</p>
         </div>
         <div className="bg-gray-700 p-4 rounded-lg">
           <p className="text-sm text-gray-400">Your Balance</p>
@@ -200,7 +200,7 @@ export default function TokenCard({ tokenAddress, bondingCurveAddress }) {
             type="number"
             value={buyAmount}
             onChange={(e) => setBuyAmount(e.target.value)}
-            placeholder="0.0 ETH"
+            placeholder="0.0 MON"
             step="0.01"
             min="0"
             className="flex-1 px-4 py-2 bg-gray-800 text-white rounded-lg border border-gray-600 focus:border-purple-500 focus:outline-none"
@@ -223,7 +223,7 @@ export default function TokenCard({ tokenAddress, bondingCurveAddress }) {
           <div className="mb-3 p-3 bg-red-900/30 border border-red-500 rounded-lg">
             <p className="text-red-400 font-bold">⚠️ RAGE TAX WARNING</p>
             <p className="text-sm text-red-300">
-              Selling at a loss &gt;10%. Rage tax: {parseFloat(rageTaxInfo.taxAmount).toFixed(4)} ETH (2%)
+              Selling at a loss &gt;10%. Rage tax: {parseFloat(rageTaxInfo.taxAmount).toFixed(4)} MON (2%)
             </p>
           </div>
         )}
@@ -264,7 +264,7 @@ export default function TokenCard({ tokenAddress, bondingCurveAddress }) {
         <div className="flex justify-between mb-2">
           <span className="text-sm text-gray-400">Progress to DEX Migration</span>
           <span className="text-sm font-bold text-white">
-            {curveInfo.marketCap} / 85 ETH
+            {curveInfo.marketCap} / 85 MON
           </span>
         </div>
         <div className="w-full bg-gray-600 rounded-full h-3">

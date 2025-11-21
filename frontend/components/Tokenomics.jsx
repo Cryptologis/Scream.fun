@@ -58,7 +58,7 @@ export default function Tokenomics() {
             <span className="text-4xl">📈</span>
             <div>
               <h3 className="text-2xl font-black text-cyan-400">Phase 1: Bonding Curve</h3>
-              <p className="text-sm text-gray-400">Pre-Migration (0 → 85 ETH)</p>
+              <p className="text-sm text-gray-400">Pre-Migration (0 → 85 MON)</p>
             </div>
           </div>
 
@@ -108,7 +108,7 @@ export default function Tokenomics() {
             <span className="text-4xl">🚀</span>
             <div>
               <h3 className="text-2xl font-black text-purple-400">Phase 2: DEX Trading</h3>
-              <p className="text-sm text-gray-400">Post-Migration (85 ETH+)</p>
+              <p className="text-sm text-gray-400">Post-Migration (85 MON+)</p>
             </div>
           </div>
 
@@ -180,7 +180,7 @@ export default function Tokenomics() {
         </div>
 
         <div className="mt-6 text-center text-gray-400 text-sm">
-          * Based on 1,000 daily screams @ 0.0005 ETH each • ETH price $1,500 • Plus trading fees
+          * Based on 1,000 daily screams @ 0.0005 MON each • MON price $1,500 • Plus trading fees
         </div>
       </div>
 
@@ -195,7 +195,7 @@ export default function Tokenomics() {
         <div className="bg-slate-800 rounded-xl p-6 border border-slate-700 text-center">
           <div className="text-3xl mb-3">⚡</div>
           <div className="text-white font-bold mb-1">Auto Migration</div>
-          <div className="text-sm text-gray-400">At 85 ETH market cap</div>
+          <div className="text-sm text-gray-400">At 85 MON market cap</div>
         </div>
 
         <div className="bg-slate-800 rounded-xl p-6 border border-slate-700 text-center">

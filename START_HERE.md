@@ -26,8 +26,8 @@ Everything has been built and committed to git!
 
 ## 💰 Revenue
 
-**100 ETH/day volume**: ~$142k/year
-**1000 ETH/day volume**: ~$1.42M/year
+**100 MON/day volume**: ~$142k/year
+**1000 MON/day volume**: ~$1.42M/year
 
 ## 🚀 Deploy Now
 

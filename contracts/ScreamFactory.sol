@@ -45,7 +45,7 @@ contract ScreamFactory {
     mapping(address => VoteStats) public tokenVotes;           // token => vote stats
     mapping(address => mapping(address => UserVote)) public userVotes; // user => token => vote data
 
-    uint256 public constant VOTE_FEE = 0.0005 ether;           // 0.0005 ETH per scream
+    uint256 public constant VOTE_FEE = 0.0005 ether;           // 0.0005 MON per scream (native token)
     uint256 public constant VOTE_COOLDOWN = 24 hours;          // Once per 24h per token
     uint256 public constant DAILY_RESET_TIME = 1 days;         // Daily contest reset
 
