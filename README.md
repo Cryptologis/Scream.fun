@@ -50,7 +50,7 @@ This isn't just another cash grab - we're building a platform the community actu
   - 10% → dev wallet
 
 ### Phase 2 - After Migration to AMM
-- Liquidity migrates to custom Uniswap V2-style pair at 85 ETH market cap
+- Liquidity migrates to custom Uniswap V2-style pair at 85 MON market cap
 - **0.3% total trading fee forever**
   - 0.15% → dev wallet
   - 0.10% → RAGE fund (distributed to holders)
@@ -72,7 +72,7 @@ A gamified voting system that lets the community decide which tokens deserve the
 ### How It Works
 
 **Voting Mechanics:**
-- **Cost:** 0.0005 ETH per scream (low barrier to entry)
+- **Cost:** 0.0005 MON per scream (low barrier to entry)
 - **Cooldown:** Vote once per 24 hours per token
 - **Revenue Split (Community-First!):**
   - **50% → Community Treasury** (DAO-controlled rewards for holders)
@@ -113,12 +113,12 @@ A gamified voting system that lets the community decide which tokens deserve the
 
 ### Revenue Potential
 
-At 1,000 daily screams (0.5 ETH/day = 182.5 ETH/year):
+At 1,000 daily screams (0.5 MON/day = 182.5 MON/year):
 
-**Annual Distribution @ $1.5k ETH:**
-- **Community Treasury (50%):** 91.25 ETH (~$137k) - DAO-controlled
-- **Development Fund (25%):** 45.6 ETH (~$68k) - Audits, features, team
-- **Protocol Owner (25%):** 45.6 ETH (~$68k) - Operations
+**Annual Distribution @ $1.5k MON:**
+- **Community Treasury (50%):** 91.25 MON (~$137k) - DAO-controlled
+- **Development Fund (25%):** 45.6 MON (~$68k) - Audits, features, team
+- **Protocol Owner (25%):** 45.6 MON (~$68k) - Operations
 
 **Why This Matters:**
 - **Community gets MORE than the protocol owner** - builds massive trust
@@ -253,7 +253,7 @@ Visit http://localhost:3000
 ### Buying Tokens
 
 1. Select a token from the list
-2. Enter ETH amount to spend
+2. Enter MON amount to spend
 3. Click "Buy"
 4. Hear the scream! 🔊
 
@@ -365,7 +365,7 @@ uint256 public constant RAGE_TAX_BPS = 200; // 2%
 ### Change Migration Threshold
 
 ```solidity
-uint256 public constant MIGRATION_THRESHOLD = 85 ether;
+uint256 public constant MIGRATION_THRESHOLD = 85 ether; // 85 MON on Monad
 ```
 
 ## 🔒 Security Features
@@ -433,7 +433,7 @@ Applied when selling at >10% loss from average buy price:
 - ✅ Create unlimited meme tokens (FREE for users)
 - ✅ Fair launch bonding curve (no presales)
 - ✅ Rage tax on panic sellers (diamond hands rewarded)
-- ✅ Auto-migration to DEX at 85 ETH
+- ✅ Auto-migration to DEX at 85 MON
 - ✅ RAGE fund distribution to holders with vesting
 - ✅ Image uploads for token branding
 - ✅ **"Scream for Your Token" community voting with streak bonuses**

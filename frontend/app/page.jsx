@@ -79,7 +79,7 @@ export default function Home() {
     .slice(0, 6);
 
   const aboutToMigrate = enrichedTokens
-    .filter(t => !t.migrated && parseFloat(t.marketCap) >= 70) // 70+ ETH (close to 85)
+    .filter(t => !t.migrated && parseFloat(t.marketCap) >= 70) // 70+ MON (close to 85)
     .sort((a, b) => parseFloat(b.marketCap) - parseFloat(a.marketCap))
     .slice(0, 6);
 
@@ -130,17 +130,17 @@ export default function Home() {
             <div className="space-y-2 text-sm">
               <div className="flex justify-between">
                 <span className="text-gray-400">Market Cap:</span>
-                <span className="text-white font-bold">{parseFloat(token.marketCap).toFixed(2)} ETH</span>
+                <span className="text-white font-bold">{parseFloat(token.marketCap).toFixed(2)} MON</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-400">Volume:</span>
-                <span className="text-white font-bold">{parseFloat(token.totalVolume).toFixed(2)} ETH</span>
+                <span className="text-white font-bold">{parseFloat(token.totalVolume).toFixed(2)} MON</span>
               </div>
               {!token.migrated && (
                 <div className="mt-2">
                   <div className="flex justify-between text-xs mb-1">
                     <span className="text-gray-400">To DEX:</span>
-                    <span className="text-cyan-400">{parseFloat(token.marketCap).toFixed(1)} / 85 ETH</span>
+                    <span className="text-cyan-400">{parseFloat(token.marketCap).toFixed(1)} / 85 MON</span>
                   </div>
                   <div className="w-full bg-slate-700 rounded-full h-1.5">
                     <div
@@ -191,7 +191,7 @@ export default function Home() {
             <p className="text-sm text-gray-400">Rage Tax</p>
           </div>
           <div className="bg-slate-800 px-6 py-4 rounded-lg border border-blue-700">
-            <p className="text-3xl font-bold text-green-400">85 ETH</p>
+            <p className="text-3xl font-bold text-green-400">85 MON</p>
             <p className="text-sm text-gray-400">DEX Migration</p>
           </div>
         </div>
@@ -226,11 +226,11 @@ export default function Home() {
                 <div className="grid grid-cols-3 gap-4 text-sm">
                   <div>
                     <p className="text-gray-400">Market Cap</p>
-                    <p className="text-white font-bold text-lg">{parseFloat(kingOfScream.marketCap).toFixed(2)} ETH</p>
+                    <p className="text-white font-bold text-lg">{parseFloat(kingOfScream.marketCap).toFixed(2)} MON</p>
                   </div>
                   <div>
                     <p className="text-gray-400">Total Volume</p>
-                    <p className="text-white font-bold text-lg">{parseFloat(kingOfScream.totalVolume).toFixed(2)} ETH</p>
+                    <p className="text-white font-bold text-lg">{parseFloat(kingOfScream.totalVolume).toFixed(2)} MON</p>
                   </div>
                   <div>
                     <p className="text-gray-400">Score</p>
@@ -292,7 +292,7 @@ export default function Home() {
             <div>
               <h2 className="text-3xl font-bold text-white mb-6 flex items-center gap-2">
                 <span>🚀</span> About to Migrate
-                <span className="text-sm text-gray-400 font-normal">(70+ ETH)</span>
+                <span className="text-sm text-gray-400 font-normal">(70+ MON)</span>
               </h2>
               <TokenGrid tokens={aboutToMigrate} emptyMessage="No tokens close to migration yet" />
             </div>

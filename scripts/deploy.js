@@ -28,7 +28,15 @@ async function main() {
   const rageFundAddress = await rageFund.getAddress();
   console.log("✅ RAGEFund deployed to:", rageFundAddress);
 
-  // 2. Deploy CustomUniswapV2Factory
+  // 2. Deploy WMON (Wrapped MON)
+  console.log("\n📦 Deploying WMON...");
+  const WMON = await ethers.getContractFactory("WMON");
+  const wmon = await WMON.deploy();
+  await wmon.waitForDeployment();
+  const wmonAddress = await wmon.getAddress();
+  console.log("✅ WMON deployed to:", wmonAddress);
+
+  // 3. Deploy CustomUniswapV2Factory
   console.log("\n📦 Deploying CustomUniswapV2Factory...");
   const CustomFactory = await ethers.getContractFactory("CustomUniswapV2Factory");
   const uniswapFactory = await CustomFactory.deploy(devWallet);
@@ -36,19 +44,20 @@ async function main() {
   const uniswapFactoryAddress = await uniswapFactory.getAddress();
   console.log("✅ CustomUniswapV2Factory deployed to:", uniswapFactoryAddress);
 
-  // 3. Set fee recipients on factory
+  // 4. Set fee recipients on factory
   console.log("\n⚙️  Configuring fee recipients...");
   await uniswapFactory.setFeeTo(devWallet);
   await uniswapFactory.setCommunityFeeTo(rageFundAddress);
   console.log("✅ Fee recipients configured");
 
-  // 4. Deploy ScreamFactory
+  // 5. Deploy ScreamFactory
   console.log("\n📦 Deploying ScreamFactory...");
   const ScreamFactory = await ethers.getContractFactory("ScreamFactory");
   const screamFactory = await ScreamFactory.deploy(
     devWallet,
     rageFundAddress,
     uniswapFactoryAddress,
+    wmonAddress,
     developmentFund,
     communityTreasury
   );
@@ -61,6 +70,7 @@ async function main() {
   console.log("🎉 DEPLOYMENT COMPLETE!");
   console.log("=".repeat(60));
   console.log("\n📋 Contract Addresses:\n");
+  console.log(`WMON:                    ${wmonAddress}`);
   console.log(`RAGEFund:                ${rageFundAddress}`);
   console.log(`CustomUniswapV2Factory:  ${uniswapFactoryAddress}`);
   console.log(`ScreamFactory:           ${screamFactoryAddress}`);
@@ -73,6 +83,7 @@ async function main() {
   console.log("📝 Next Steps:");
   console.log("=".repeat(60));
   console.log("\n1. Save these addresses to your frontend .env.local:");
+  console.log(`   NEXT_PUBLIC_WMON=${wmonAddress}`);
   console.log(`   NEXT_PUBLIC_SCREAM_FACTORY=${screamFactoryAddress}`);
   console.log(`   NEXT_PUBLIC_RAGE_FUND=${rageFundAddress}`);
   console.log(`   NEXT_PUBLIC_UNISWAP_FACTORY=${uniswapFactoryAddress}`);
@@ -93,6 +104,7 @@ async function main() {
       communityTreasury: communityTreasury,
     },
     contracts: {
+      wmon: wmonAddress,
       rageFund: rageFundAddress,
       uniswapFactory: uniswapFactoryAddress,
       screamFactory: screamFactoryAddress,

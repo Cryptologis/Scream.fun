@@ -55,12 +55,12 @@ React/Next.js Application:
   - 30% → dev wallet
   - 70% → RAGE fund
 
-### Phase 2 - DEX (Auto-migration at 85 ETH)
+### Phase 2 - DEX (Auto-migration at 85 MON)
 - **0.3% trading fee**: 0.15% dev + 0.10% RAGE + 0.05% buyback
 
 ### Your Earnings
-At 100 ETH/day volume: **$142k/year** (Phase 1)
-At 1000 ETH/day volume: **$1.42M/year** (Phase 1)
+At 100 MON/day volume: **$142k/year** (Phase 1)
+At 1000 MON/day volume: **$1.42M/year** (Phase 1)
 
 *These are PASSIVE, AUTOMATIC earnings!*
 
@@ -122,22 +122,22 @@ Visit http://localhost:3000 🎉
 
 ## 📈 Revenue Breakdown
 
-### Daily Volume: 100 ETH
+### Daily Volume: 100 MON
 ```
 Phase 1 (Bonding Curve):
-├── Trading fees: 0.4 ETH
-│   └── Your cut: 0.2 ETH
-├── Rage taxes: ~0.06 ETH
-│   └── Your cut: ~0.018 ETH
-└── Total: ~0.218 ETH/day ≈ $327/day ≈ $119,355/year
+├── Trading fees: 0.4 MON
+│   └── Your cut: 0.2 MON
+├── Rage taxes: ~0.06 MON
+│   └── Your cut: ~0.018 MON
+└── Total: ~0.218 MON/day ≈ $327/day ≈ $119,355/year
 
 Phase 2 (DEX):
-├── Trading fees: 0.3 ETH
-│   └── Your cut: 0.15 ETH
-└── Total: 0.15 ETH/day ≈ $225/day ≈ $82,125/year
+├── Trading fees: 0.3 MON
+│   └── Your cut: 0.15 MON
+└── Total: 0.15 MON/day ≈ $225/day ≈ $82,125/year
 ```
 
-### Daily Volume: 1000 ETH (10x)
+### Daily Volume: 1000 MON (10x)
 **Phase 1**: ~$1,193,550/year
 **Phase 2**: ~$821,250/year
 

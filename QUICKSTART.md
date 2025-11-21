@@ -60,7 +60,7 @@ Visit http://localhost:3000 🎉
 
 1. **Connect Wallet** → MetaMask auto-switches to Monad Testnet
 2. **Create Token** → Name: "Test Coin", Symbol: "TEST"
-3. **Buy Tokens** → Buy 0.1 ETH worth → Hear scream! 🔊
+3. **Buy Tokens** → Buy 0.1 MON worth → Hear scream! 🔊
 4. **Check Stats** → See price, market cap, RAGE fund
 5. **Try Rage Sell** → Sell at loss to trigger 2% tax warning
 6. **Normal Sell** → Sell without rage tax
@@ -105,21 +105,21 @@ After deployment, track your earnings:
 
 ## 🎯 Revenue Calculations
 
-Example: 100 ETH daily volume
+Example: 100 MON daily volume
 
 **Phase 1 (Bonding Curve):**
-- Trading fees: 100 ETH × 0.4% = 0.4 ETH
-  - Your cut: 0.2 ETH/day
-- Rage taxes (assume 10% of sells trigger): 10 ETH × 2% = 0.2 ETH
-  - Your cut: 0.06 ETH/day
-- **Total: ~0.26 ETH/day = 94.9 ETH/year**
+- Trading fees: 100 MON × 0.4% = 0.4 MON
+  - Your cut: 0.2 MON/day
+- Rage taxes (assume 10% of sells trigger): 10 MON × 2% = 0.2 MON
+  - Your cut: 0.06 MON/day
+- **Total: ~0.26 MON/day = 94.9 MON/year**
 
 **Phase 2 (DEX):**
-- Trading fees: 100 ETH × 0.3% = 0.3 ETH
-  - Your cut: 0.15 ETH/day
-- **Total: ~0.15 ETH/day = 54.75 ETH/year**
+- Trading fees: 100 MON × 0.3% = 0.3 MON
+  - Your cut: 0.15 MON/day
+- **Total: ~0.15 MON/day = 54.75 MON/year**
 
-*At 1000 ETH daily volume, multiply by 10x!*
+*At 1000 MON daily volume, multiply by 10x!*
 
 ## 🚨 Common Issues
 

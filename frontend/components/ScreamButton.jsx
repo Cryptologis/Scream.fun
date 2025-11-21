@@ -150,7 +150,7 @@ export default function ScreamButton({ tokenAddress }) {
       {/* Info */}
       <div className="mt-3 space-y-1">
         <p className="text-xs text-gray-400 text-center">
-          Cost: 0.0005 ETH • Vote once per 24h
+          Cost: 0.0005 MON • Vote once per 24h
         </p>
         <p className="text-xs text-purple-300 text-center">
           Revenue: 50% Community • 25% Development • 25% Protocol

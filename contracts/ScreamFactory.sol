@@ -13,6 +13,8 @@ contract ScreamFactory {
     address public devWallet;
     address public rageFund;
     address public uniswapFactory;
+    address public wmon;                 // Wrapped MON for Uniswap pairs
+    address public priceOracle;          // MON/USD price oracle
     address public developmentFund;      // 25% of voting revenue for protocol development
     address public communityTreasury;    // 50% of voting revenue for DAO-controlled rewards
     address public owner;
@@ -45,7 +47,7 @@ contract ScreamFactory {
     mapping(address => VoteStats) public tokenVotes;           // token => vote stats
     mapping(address => mapping(address => UserVote)) public userVotes; // user => token => vote data
 
-    uint256 public constant VOTE_FEE = 0.0005 ether;           // 0.0005 ETH per scream
+    uint256 public constant VOTE_FEE = 0.0005 ether;           // 0.0005 MON per scream (native token)
     uint256 public constant VOTE_COOLDOWN = 24 hours;          // Once per 24h per token
     uint256 public constant DAILY_RESET_TIME = 1 days;         // Daily contest reset
 
@@ -76,6 +78,8 @@ contract ScreamFactory {
         address _devWallet,
         address _rageFund,
         address _uniswapFactory,
+        address _wmon,
+        address _priceOracle,
         address _developmentFund,
         address _communityTreasury
     ) {
@@ -83,6 +87,8 @@ contract ScreamFactory {
         devWallet = _devWallet;
         rageFund = _rageFund;
         uniswapFactory = _uniswapFactory;
+        wmon = _wmon;
+        priceOracle = _priceOracle;
         developmentFund = _developmentFund;
         communityTreasury = _communityTreasury;
     }
@@ -103,6 +109,8 @@ contract ScreamFactory {
             devWallet,
             rageFund,
             uniswapFactory,
+            wmon,
+            priceOracle,
             name,
             symbol
         );
@@ -169,6 +177,20 @@ contract ScreamFactory {
      */
     function setUniswapFactory(address _uniswapFactory) external onlyOwner {
         uniswapFactory = _uniswapFactory;
+    }
+
+    /**
+     * @notice Update WMON address (only owner)
+     */
+    function setWMON(address _wmon) external onlyOwner {
+        wmon = _wmon;
+    }
+
+    /**
+     * @notice Update price oracle (only owner)
+     */
+    function setPriceOracle(address _priceOracle) external onlyOwner {
+        priceOracle = _priceOracle;
     }
 
     /**
