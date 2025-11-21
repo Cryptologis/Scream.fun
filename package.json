@@ -6,11 +6,15 @@
   "scripts": {
     "compile": "hardhat compile",
     "test": "hardhat test",
+    "node": "hardhat node",
+    "deploy:local": "hardhat run scripts/deploy.js --network localhost",
     "deploy:testnet": "hardhat run scripts/deploy.js --network monadTestnet",
     "deploy:mainnet": "hardhat run scripts/deploy.js --network monadMainnet",
+    "create-token:local": "hardhat run scripts/create-test-token.js --network localhost",
     "create-token:testnet": "hardhat run scripts/create-test-token.js --network monadTestnet",
     "create-token:mainnet": "hardhat run scripts/create-test-token.js --network monadMainnet",
-    "node": "hardhat node"
+    "custom-token:local": "hardhat run scripts/create-custom-token.js --network localhost",
+    "interact:local": "hardhat run scripts/interact-with-token.js --network localhost"
   },
   "keywords": [],
   "author": "",
