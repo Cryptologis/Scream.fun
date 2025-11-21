@@ -32,10 +32,17 @@ export const MONAD_MAINNET = {
 
 // ABIs
 export const SCREAM_FACTORY_ABI = [
-  "function createToken(string name, string symbol, string imageUrl) returns (address, address)",
+  "function createToken(string name, string symbol) returns (address, address)",
   "function getTotalTokens() view returns (uint256)",
-  "function getTokenInfo(uint256 index) view returns (tuple(address token, address bondingCurve, address creator, uint256 createdAt, string name, string symbol, string imageUrl))",
-  "event TokenCreated(address indexed token, address indexed bondingCurve, address indexed creator, string name, string symbol, string imageUrl, uint256 tokenId)",
+  "function getTokenInfo(uint256 index) view returns (tuple(address token, address bondingCurve, address creator, uint256 createdAt, string name, string symbol))",
+  "event TokenCreated(address indexed token, address indexed bondingCurve, address indexed creator, string name, string symbol, uint256 tokenId)",
+  // Voting functions
+  "function screamForToken(address tokenAddress) payable",
+  "function getTokenVoteStats(address tokenAddress) view returns (uint256 dailyScreams, uint256 totalScreams, uint256 lastDailyReset)",
+  "function getUserVoteData(address user, address tokenAddress) view returns (uint256 lastVoteTime, uint256 consecutiveDays, uint256 lastVoteDay, uint256 cooldownRemaining)",
+  "function getTopDailyScreamers(uint256 limit) view returns (address[])",
+  "function getTopAllTimeScreamers(uint256 limit) view returns (address[])",
+  "event TokenScreamed(address indexed token, address indexed voter, uint256 screamPower, uint256 streakBonus, uint256 dailyTotal, uint256 allTimeTotal)",
 ];
 
 export const BONDING_CURVE_ABI = [

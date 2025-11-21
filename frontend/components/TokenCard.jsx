@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { ethers } from "ethers";
 import { BONDING_CURVE_ABI, ERC20_ABI, RAGE_FUND_ABI, CONTRACT_ADDRESSES } from "@/lib/contracts";
 import { formatEther, parseEther, playScream } from "@/lib/web3";
+import ScreamButton from "./ScreamButton";
 
 export default function TokenCard({ tokenAddress, bondingCurveAddress }) {
   const [tokenInfo, setTokenInfo] = useState(null);
@@ -273,6 +274,9 @@ export default function TokenCard({ tokenAddress, bondingCurveAddress }) {
           />
         </div>
       </div>
+
+      {/* Scream for Token (Voting) */}
+      <ScreamButton tokenAddress={tokenAddress} />
     </div>
   );
 }

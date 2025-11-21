@@ -11,10 +11,33 @@ The fairest (and most profitable) Pump.fun-style meme coin launchpad on Monad (E
 - 🖼️ **Image Uploads** - Every token gets a visual identity
 - 👑 **King of Scream Leaderboard** - Highest Volume × Market Cap
 - 🆕 **Token Showcases** - Recently Created, About to Migrate, Migrated sections
+- 😱 **"Scream for Your Token" Voting** - Community-powered token exposure with daily contests
 - 🎁 **Referral System** - Earn 0.05% commission on referred token trades
 - 🔒 **Anti-Snipe Protection** - Time-based locking with gradual unlock (5 min lock + 30 min unlock)
 - 🎨 **Creator Allocation** - Optional 0-10% allocation (50% immediate, 50% at migration)
 - 💎 **Diamond Hands Rewards** - Massive holder rewards with vesting + holding requirements
+
+## 💚 Community-First Philosophy
+
+**Unlike other platforms that keep everything, Scream.fun gives MORE to the community than to the protocol owner.**
+
+From voting revenue:
+- **50% goes directly to community treasury** (controlled by future DAO)
+- 25% funds protocol development (audits, features, team)
+- 25% to protocol owner (maintenance & operations)
+
+**What this means:**
+- The community literally owns MORE of the platform than the creator
+- Voting revenue creates a war chest for holder rewards
+- Progressive decentralization from day one
+- Aligned incentives: platform success = community wealth
+
+**DAO Governance Roadmap:**
+1. **Phase 1 (Launch):** Treasury accumulates, community builds trust
+2. **Phase 2 (6 months):** Launch governance token, delegate control gradually
+3. **Phase 3 (12 months):** Full DAO control of treasury decisions
+
+This isn't just another cash grab - we're building a platform the community actually OWNS.
 
 ## 💰 Revenue Model
 
@@ -41,6 +64,69 @@ At migration, **90% of accumulated RAGE fund** is distributed to all token holde
 - **Holding Requirement:** Must maintain token balance to claim
 - Sell tokens = lose proportional unclaimed rewards
 - True diamond hands get maximum rewards! 💪
+
+## 😱 "Scream for Your Token" - Community Voting
+
+A gamified voting system that lets the community decide which tokens deserve the spotlight!
+
+### How It Works
+
+**Voting Mechanics:**
+- **Cost:** 0.0005 ETH per scream (low barrier to entry)
+- **Cooldown:** Vote once per 24 hours per token
+- **Revenue Split (Community-First!):**
+  - **50% → Community Treasury** (DAO-controlled rewards for holders)
+  - **25% → Development Fund** (audits, features, team expansion)
+  - **25% → Protocol Owner** (maintenance & operations)
+
+**Vote Power Multipliers:**
+- **Base Vote:** 1x scream power
+- **Holder Bonus:** 2x if you hold the token you're screaming for
+- **Streak Bonus:** Daily consecutive screams multiply your power:
+  - Day 1: 1x
+  - Day 2: 2x
+  - Day 3: 3x
+  - ...up to 10x max
+
+**Example:** If you hold tokens and have a 5-day streak, your scream = 1 × 2 (holder) × 5 (streak) = **10x power!**
+
+### Leaderboards
+
+**Daily Contest:**
+- Resets every 24 hours
+- Top 5 tokens get prime homepage exposure
+- Fresh competition daily keeps engagement high
+
+**All-Time Leaderboard:**
+- Cumulative screams across all time
+- Shows which tokens have the strongest community support
+- Helps identify legitimate projects vs pump-and-dumps
+
+### Why This Matters
+
+1. **Fair Exposure** - Community decides what deserves attention, not paid promoters
+2. **Engagement Loop** - Daily voting creates habit formation and recurring traffic
+3. **Holder Alignment** - 2x bonus rewards actual believers, not mercenaries
+4. **Streak Gamification** - Incentivizes long-term community building
+5. **Revenue Generator** - Every scream adds to platform revenue
+6. **Anti-Bot** - 24h cooldown + cost prevents spam
+
+### Revenue Potential
+
+At 1,000 daily screams (0.5 ETH/day = 182.5 ETH/year):
+
+**Annual Distribution @ $1.5k ETH:**
+- **Community Treasury (50%):** 91.25 ETH (~$137k) - DAO-controlled
+- **Development Fund (25%):** 45.6 ETH (~$68k) - Audits, features, team
+- **Protocol Owner (25%):** 45.6 ETH (~$68k) - Operations
+
+**Why This Matters:**
+- **Community gets MORE than the protocol owner** - builds massive trust
+- Development fund ensures long-term sustainability
+- Creates alignment between platform success and community wealth
+- Future DAO can decide on airdrops, staking rewards, buybacks, etc.
+
+This is **in addition** to trading fees!
 
 ## 🏗️ Architecture
 
@@ -350,25 +436,28 @@ Applied when selling at >10% loss from average buy price:
 - ✅ Auto-migration to DEX at 85 ETH
 - ✅ RAGE fund distribution to holders with vesting
 - ✅ Image uploads for token branding
+- ✅ **"Scream for Your Token" community voting with streak bonuses**
 - ✅ King of Scream leaderboard
 - ✅ Token showcase sections
 - ✅ Real-time stats and progress bars
 - ✅ Wallet integration (MetaMask)
 - ✅ Mobile responsive design
-- ✅ Scream sound effects 🔊
+- ✅ Scream sound effects 🔊 (with mute toggle)
 - ✅ Referral system
 - ✅ Anti-snipe protection
 - ✅ Creator allocation options
 
 ## 💎 Why Scream.fun?
 
-1. **Zero Creator Fees** - No rug pulls, no honeypots
-2. **Fair Launch** - Everyone buys from bonding curve
-3. **Rage Tax** - Punishes panic sellers, rewards diamond hands
-4. **Auto Migration** - Becomes a real DEX pair at threshold
-5. **Profit Sharing** - Dev fees + RAGE distributions
-6. **Monad Speed** - 10k TPS, near-instant finality
-7. **Low Fees** - Cheap gas on Monad
+1. **Community-First** - 50% of voting revenue to community treasury (MORE than protocol owner!)
+2. **Zero Creator Fees** - No rug pulls, no honeypots
+3. **Fair Launch** - Everyone buys from bonding curve
+4. **Rage Tax** - Punishes panic sellers, rewards diamond hands
+5. **Auto Migration** - Becomes a real DEX pair at threshold
+6. **Profit Sharing** - Dev fees + RAGE distributions
+7. **Future DAO** - Progressive decentralization roadmap
+8. **Monad Speed** - 10k TPS, near-instant finality
+9. **Low Fees** - Cheap gas on Monad
 
 ## 🚀 Roadmap
 
@@ -382,6 +471,10 @@ Applied when selling at >10% loss from average buy price:
 - [x] **Image upload for tokens**
 - [x] **Token showcases** (Recently Created, About to Migrate, Migrated)
 - [x] **King of Scream leaderboard**
+- [x] **"Scream for Your Token" community voting system**
+- [x] **Daily & all-time voting leaderboards**
+- [x] **Streak bonuses & holder multipliers**
+- [x] **Sound mute toggle**
 - [x] **Referral system**
 - [x] **Anti-snipe protection**
 - [x] **Creator allocation with vesting**
