@@ -5,6 +5,7 @@ import { ethers } from "ethers";
 import CreateTokenForm from "@/components/CreateTokenForm";
 import TokenCard from "@/components/TokenCard";
 import MostScreamed from "@/components/MostScreamed";
+import Tokenomics from "@/components/Tokenomics";
 import { CONTRACT_ADDRESSES, SCREAM_FACTORY_ABI, BONDING_CURVE_ABI } from "@/lib/contracts";
 
 export default function Home() {
@@ -244,6 +245,9 @@ export default function Home() {
 
       {/* Most Screamed - Community Voting */}
       <MostScreamed />
+
+      {/* Tokenomics Section */}
+      <Tokenomics />
 
       {/* Create Token */}
       <div className="max-w-2xl mx-auto">
